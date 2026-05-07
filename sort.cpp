@@ -81,20 +81,27 @@ void FilesDivider(vector<string> files) //Parses each element of the vector and 
     string::size_type period;
     string filename;
     string fileType;
-	string fileinquestion;
+    string fileinquestion;
 
-    for (int pos = 2; pos < files.size(); pos++)
+    vector<string> fileTypevec;
+    vector<string> overflow;
+
+    for (int pos = 0; pos < files.size(); pos++)
     {
+        fileinquestion = files.at(pos);
         period = files.at(pos).rfind(".");
+
+        if (period == string::npos)
+        {
+            overflow.push_back(fileinquestion);
+            continue;
+        }
+
         fileType = files.at(pos).substr(period);
         filename = fileType;
 
-        fileinquestion = files.at(pos);
-
-
-        vector<string> fileTypevec;
-
-        if (filename == ".docx"){
+        if (filename == ".docx") 
+        {
 
             cout << fileinquestion << " would go in folder : " << filename << endl;
             fileTypevec.push_back(fileinquestion);
@@ -103,18 +110,15 @@ void FilesDivider(vector<string> files) //Parses each element of the vector and 
             //    cout << files[i] << "\n";  // print each file from the vector
             //}
 
-            cout << "Added: " << fileinquestion << " to " << filename <<endl;
+            cout << "Added: " << fileinquestion << " to " << filename << endl;
             cout << endl;
-         
-           
 
-
-		}
+        }
         else if (filename == ".txt") {
 
             cout << files.at(pos) << " would go in folder : " << filename << endl;
             fileTypevec.push_back(files.at(pos));
-   
+
         }
 
         else {
