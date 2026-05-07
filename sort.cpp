@@ -52,7 +52,9 @@ vector<string> listFiles(string path)  // Parses through the directory and popul
 
     do
     {
-        files.push_back(findData.cFileName);
+        string name = findData.cFileName;
+        if (name != "." && name != "..")
+            files.push_back(name);
     } while (FindNextFileA(hFind, &findData) != 0);
 
     FindClose(hFind);
@@ -114,6 +116,7 @@ void FilesDivider(vector<string> files) //Parses each element of the vector and 
             cout << endl;
 
         }
+        
         else if (filename == ".txt") {
 
             cout << files.at(pos) << " would go in folder : " << filename << endl;
