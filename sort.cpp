@@ -107,6 +107,7 @@ void FilesDivider(vector<string> files) //Parses each element of the vector and 
     vector<string> css;
     vector<string> md;
     vector<string> hmtl;
+    vector<string> noextention;
     vector<string> overflow;
 
     for (int pos = 0; pos < files.size(); pos++)
@@ -116,7 +117,7 @@ void FilesDivider(vector<string> files) //Parses each element of the vector and 
 
         if (period == string::npos)
         {
-            overflow.push_back(fileinquestion);
+            noextention.push_back(fileinquestion);
             continue;
         }
 
@@ -281,9 +282,11 @@ void FilesDivider(vector<string> files) //Parses each element of the vector and 
         }
         else 
         {
-            cout << files.at(pos) << " was not put in a folder" << endl;
+            cout << fileinquestion << " would go in folder : " << filename << endl;
+            overflow.push_back(fileinquestion);
+            cout << "Could not find appropriate container." << endl;
+            cout << "Added: " << fileinquestion << " to overflow." << endl;
+            cout << endl;
         }
-
     }
-    //missing populates new vectors based on file types
 }
