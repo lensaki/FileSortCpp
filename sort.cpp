@@ -1,13 +1,4 @@
 #include "Sort.h"
-/*
-* Wanted to split the main and the other methods between two different cpp files
-* but it was having problems with the variables for the vector and file Directory
-*/
-
-vector<string> listFiles(string path); // returns vector
-bool checkDirectory(string path); //checks if Directory is valid
-void FilesDivider(vector<string> files); //takes in the main vector of files and divides it into sub-vectors
-
 
 vector<string> listFiles(string path)  // Parses through the directory and populates the main vector
 {
