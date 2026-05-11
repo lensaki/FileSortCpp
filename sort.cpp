@@ -353,25 +353,70 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
     UserChoise(names, path);
 }
 
-void AlphabetSortFiles(vector<string> filename, string path)
+bool AlphabetSortFiles(vector<string>& filename)
 {
+	
+    int alphabetsortchoice = -3;
+    
+    int row = 0;
+   
+    cout << endl;
+    cout << "Would you like to sort this alphabetically ascending (A-Z) or descending (Z-A)" << endl;
+    cout << endl;
+    cout << "If ascending enter 1, if descending enter 2: " << endl;
+    cout << "If you don't want to sort enter 3:" << endl;
+    cout << endl;
 
-    if (checkDirectory(path) == true) 
+    cin >> alphabetsortchoice;
+
+	if (alphabetsortchoice == 1)
+	{
+		sort(filename.begin(), filename.end());
+        
+	}
+	else if (alphabetsortchoice == 2)
+	{
+		sort(filename.rbegin(), filename.rend());
+	}
+	else if (alphabetsortchoice == 3)
+	{
+        cout << "\n";
+        cout << left << setw(15) << "Position" << setw(40) << "Filename" << "\n";
+        cout << string(45, '-') << "\n";
+        row = 0;
+        for (const string& file : filename)
+        {
+            cout << left << setw(15) << row++ << setw(40) << file << "\n";
+        }
+        cout << endl;
+        return false;
+	}
+	else
+	{
+		cout << "Invalid choice\n";
+	}
+
+    // print file table
+    cout << "\n";
+    cout << left << setw(15) << "Position" << setw(40) << "Filename" << "\n";
+    cout << string(45, '-') << "\n";
+    row = 0;
+    for (const string& file : filename)
     {
-
+        cout << left << setw(15) << row++ << setw(40) << file << "\n";
     }
+    cout << endl; 
+    return true;
 
-    else
-        cout << "Invalid Directory" << endl;
-    return;
 }
 
 void UserChoise(vector<vector<string>*> names, string path)
+
 {
     string labels[] = {
-        "docx", "txt", "xlsx", "json", "h", "pdf", "svg", "cpp", "bak", "jpg", "png", "csv", "pptx", 
+        "docx", "txt", "xlsx", "json", "h", "pdf", "svg", "cpp", "bak", "jpg", "png", "csv", "pptx",
         "tmp", "README", "py", "yaml", "mp3", "mp4", "css", "md", "html", "noextention", "overflow" };
-    
+
     while (true) // outer loop, goes back to folder select
     {
         cout << "\n";
@@ -385,6 +430,7 @@ void UserChoise(vector<vector<string>*> names, string path)
         int choice = -3;
         while (true) // folder selection loop
         {
+            cout << endl;
             cout << "Insert the position of the folder you want to open or -1 to exit: ";
             cin >> choice;
 
@@ -399,7 +445,6 @@ void UserChoise(vector<vector<string>*> names, string path)
             cout << "Invalid choice\n";
         }
 
-        // print file table
         cout << "\n";
         cout << left << setw(15) << "Position" << setw(40) << "Filename" << "\n";
         cout << string(45, '-') << "\n";
@@ -408,10 +453,21 @@ void UserChoise(vector<vector<string>*> names, string path)
         {
             cout << left << setw(15) << row++ << setw(40) << file << "\n";
         }
+        cout << endl;
+        
+        bool sortbool = true;
 
+        while (sortbool)
+        {
+            sortbool = AlphabetSortFiles(*names[choice]);
+        }
+       
         int fileChoice = -3;
+
+       
         while (true) // file selection loop
         {
+
             cout << "Insert the position of the file you want to open, -2 to go back, or -1 to exit: ";
             cin >> fileChoice;
 
@@ -427,7 +483,7 @@ void UserChoise(vector<vector<string>*> names, string path)
             {
                 string filename = (*names[choice])[fileChoice];
                 string fullpath = path + "\\." + labels[choice] + "\\" + filename;
-                cout << "Trying to open: " << fullpath << "\n"; 
+                cout << "Trying to open: " << fullpath << "\n";
                 HINSTANCE result = ShellExecuteA(0, "open", fullpath.c_str(), 0, 0, SW_SHOW);
                 if ((int)result <= 32) // anything <= 32 means it failed
                 {
