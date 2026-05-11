@@ -47,8 +47,8 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
     string fileinquestion;
     string folderName;
 
-    vector<string> docx, txt, xlsx, json, h, pdf, svg, cpp, back, jpg, png, csv, 
-        pptx, tmp, README, py, yaml, mp3, mp4, css, md, hmtl, noextention, overflow;
+    vector<string> docx, txt, xlsx, json, h, pdf, svg, cpp, bak, jpg, png, csv,
+        pptx, tmp, README, py, yaml, mp3, mp4, css, md, html, noextention, overflow;
 
     for (int pos = 0; pos < files.size(); pos++)
     {
@@ -58,6 +58,12 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
         if (period == string::npos)
         {
             noextention.push_back(fileinquestion);
+            fs::path oldLocation = fs::path(path) / fileinquestion; // creates the old location of the file
+            fs::path newFolder = fs::path(path) / folderName; // creates the new folder path
+            fs::path newLocation = newFolder / fileinquestion; // creates the new location of the file
+
+            fs::create_directory(newFolder); // creates the new folder
+            fs::rename(oldLocation, newLocation);
             continue;
         }
 
@@ -67,23 +73,18 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
         if (filename == ".docx")
         {
-            cout << fileinquestion << " would go in folder : " << filename << endl;
             docx.push_back(fileinquestion);
 
-			fs::path oldLocation = fs::path(path) / fileinquestion; // creates the old location of the file
-			fs::path newFolder = fs::path(path) / folderName; // creates the new folder path
-			fs::path newLocation = newFolder / fileinquestion; // creates the new location of the file
+            fs::path oldLocation = fs::path(path) / fileinquestion; // creates the old location of the file
+            fs::path newFolder = fs::path(path) / folderName; // creates the new folder path
+            fs::path newLocation = newFolder / fileinquestion; // creates the new location of the file
 
-			fs::create_directory(newFolder); // creates the new folder
-			fs::rename(oldLocation, newLocation); // moves the file to the new location
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
+            fs::create_directory(newFolder); // creates the new folder
+            fs::rename(oldLocation, newLocation); // moves the file to the new location
         }
 
         else if (filename == ".txt")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
             txt.push_back(files.at(pos));
 
 
@@ -93,14 +94,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".xlsx")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            xlsx.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -108,14 +106,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".json")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            json.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -123,14 +118,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".csv")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            csv.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -138,14 +130,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".h")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            h.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -153,14 +142,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".pdf")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            pdf.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -168,14 +154,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".svg")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            svg.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -183,14 +166,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".cpp")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            cpp.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -198,14 +178,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".bak")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            bak.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -213,14 +190,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".png")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            png.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -228,14 +202,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".jpg")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            jpg.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -243,14 +214,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".pptx")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            pptx.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -258,14 +226,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".tmp")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            tmp.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -273,14 +238,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".README")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            README.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -288,14 +250,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".py")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            py.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -303,14 +262,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".yaml")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            yaml.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -318,14 +274,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".mp3")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            mp3.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -333,14 +286,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".mp4")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            mp4.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -348,14 +298,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".css")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            css.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -363,14 +310,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".md")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            md.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -378,14 +322,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else if (filename == ".html")
         {
-            cout << files.at(pos) << " would go in folder : " << filename << endl;
-            txt.push_back(files.at(pos));
+            html.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -393,15 +334,11 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-
-            cout << "Added: " << fileinquestion << " to " << filename << endl;
-            cout << endl;
         }
+
         else
         {
-            cout << fileinquestion << " would go in folder : " << filename << endl;
-            overflow.push_back(fileinquestion);
+            overflow.push_back(files.at(pos));
 
             fs::path oldLocation = fs::path(path) / fileinquestion;
             fs::path newFolder = fs::path(path) / folderName;
@@ -409,25 +346,100 @@ void FilesDivider(vector<string> files, string path) //Parses each element of th
 
             fs::create_directory(newFolder);
             fs::rename(oldLocation, newLocation);
-
-            cout << "Could not find appropriate container." << endl;
-            cout << "Added: " << fileinquestion << " to overflow." << endl;
-            cout << endl;
         }
     }
+    vector<vector<string>*> names = { &docx, &txt, &xlsx, &json, &h, &pdf, &svg, &cpp, &bak, &jpg,
+    &png, &csv, &pptx, &tmp, &README, &py, &yaml, &mp3, &mp4,&css, &md, &html, &noextention, &overflow };
+    UserChoise(names, path);
 }
 
-void AlphabetSortFiles(vector<string> filename, string path) {
-    
-    if (checkDirectory(path) == true) {
+void AlphabetSortFiles(vector<string> filename, string path)
+{
+
+    if (checkDirectory(path) == true) 
+    {
 
     }
 
     else
-		cout << "Invalid Directory" << endl;
-        return;
-        
-
-   
+        cout << "Invalid Directory" << endl;
+    return;
 }
 
+void UserChoise(vector<vector<string>*> names, string path)
+{
+    string labels[] = {
+        "docx", "txt", "xlsx", "json", "h", "pdf", "svg", "cpp", "bak", "jpg", "png", "csv", "pptx", 
+        "tmp", "README", "py", "yaml", "mp3", "mp4", "css", "md", "html", "noextention", "overflow" };
+    
+    while (true) // outer loop, goes back to folder select
+    {
+        cout << "\n";
+        cout << left << setw(15) << "Position" << setw(40) << "Folder" << "\n";
+        cout << string(45, '-') << "\n";
+        for (int i = 0; i < 24; i++)
+        {
+            cout << left << setw(15) << i << setw(40) << labels[i] << "\n";
+        }
+
+        int choice = -3;
+        while (true) // folder selection loop
+        {
+            cout << "Insert the position of the folder you want to open or -1 to exit: ";
+            cin >> choice;
+
+            if (choice == -1)
+            {
+                return;
+            }
+            if (choice >= 0 && choice < 24)
+            {
+                break;
+            }
+            cout << "Invalid choice\n";
+        }
+
+        // print file table
+        cout << "\n";
+        cout << left << setw(15) << "Position" << setw(40) << "Filename" << "\n";
+        cout << string(45, '-') << "\n";
+        int row = 0;
+        for (const string& file : *names[choice])
+        {
+            cout << left << setw(15) << row++ << setw(40) << file << "\n";
+        }
+
+        int fileChoice = -3;
+        while (true) // file selection loop
+        {
+            cout << "Insert the position of the file you want to open, -2 to go back, or -1 to exit: ";
+            cin >> fileChoice;
+
+            if (fileChoice == -1)
+            {
+                return;
+            }
+            if (fileChoice == -2)
+            {
+                break;
+            }
+            if (fileChoice >= 0 && fileChoice < names[choice]->size())
+            {
+                string filename = (*names[choice])[fileChoice];
+                string fullpath = path + "\\." + labels[choice] + "\\" + filename;
+                cout << "Trying to open: " << fullpath << "\n"; 
+                HINSTANCE result = ShellExecuteA(0, "open", fullpath.c_str(), 0, 0, SW_SHOW);
+                if ((int)result <= 32) // anything <= 32 means it failed
+                {
+                    cout << "Failed to open file, error code: " << (int)result << "\n";
+                }
+                break;
+            }
+            cout << "Invalid choice\n";
+        }
+        if (fileChoice == -2)
+        {
+            continue;
+        }
+    }
+}
