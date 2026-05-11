@@ -19,7 +19,7 @@ int main()
     }
     cout << endl;
     cout << endl;
-    FilesDivider(files);
+    FilesDivider(files, path);
 
     return 0;
 }
