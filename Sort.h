@@ -11,6 +11,7 @@
 #include <filesystem>
 #include<iomanip>
 #include <shellapi.h>
+#include <algorithm>
 
 using namespace std;
 namespace fs = std::filesystem;
